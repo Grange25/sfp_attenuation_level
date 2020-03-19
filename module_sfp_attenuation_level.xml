@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sfp_attenuation_level" default="compile.module.sfp_attenuation_level">
+  <dirname property="module.sfp_attenuation_level.basedir" file="${ant.file.module_sfp_attenuation_level}"/>
+  
+  <property name="module.jdk.home.sfp_attenuation_level" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sfp_attenuation_level" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sfp_attenuation_level" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sfp_attenuation_level" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="sfp_attenuation_level.output.dir" value="${module.sfp_attenuation_level.basedir}/out/production/sfp_attenuation_level"/>
+  <property name="sfp_attenuation_level.testoutput.dir" value="${module.sfp_attenuation_level.basedir}/out/test/sfp_attenuation_level"/>
+  
+  <path id="sfp_attenuation_level.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sfp_attenuation_level.module.production.classpath">
+    <path refid="${module.jdk.classpath.sfp_attenuation_level}"/>
+    <path refid="library.net.sf.opencsv:opencsv:2.3.classpath"/>
+  </path>
+  
+  <path id="sfp_attenuation_level.runtime.production.module.classpath">
+    <pathelement location="${sfp_attenuation_level.output.dir}"/>
+    <path refid="library.net.sf.opencsv:opencsv:2.3.classpath"/>
+  </path>
+  
+  <path id="sfp_attenuation_level.module.classpath">
+    <path refid="${module.jdk.classpath.sfp_attenuation_level}"/>
+    <pathelement location="${sfp_attenuation_level.output.dir}"/>
+    <path refid="library.net.sf.opencsv:opencsv:2.3.classpath"/>
+  </path>
+  
+  <path id="sfp_attenuation_level.runtime.module.classpath">
+    <pathelement location="${sfp_attenuation_level.testoutput.dir}"/>
+    <pathelement location="${sfp_attenuation_level.output.dir}"/>
+    <path refid="library.net.sf.opencsv:opencsv:2.3.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sfp_attenuation_level">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sfp_attenuation_level">
+    <patternset refid="excluded.from.module.sfp_attenuation_level"/>
+  </patternset>
+  
+  <path id="sfp_attenuation_level.module.sourcepath">
+    <dirset dir="${module.sfp_attenuation_level.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sfp_attenuation_level" depends="compile.module.sfp_attenuation_level.production,compile.module.sfp_attenuation_level.tests" description="Compile module sfp_attenuation_level"/>
+  
+  <target name="compile.module.sfp_attenuation_level.production" depends="register.custom.compilers" description="Compile module sfp_attenuation_level; production classes">
+    <mkdir dir="${sfp_attenuation_level.output.dir}"/>
+    <javac2 destdir="${sfp_attenuation_level.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sfp_attenuation_level}/javac">
+      <compilerarg line="${compiler.args.sfp_attenuation_level}"/>
+      <bootclasspath refid="sfp_attenuation_level.module.bootclasspath"/>
+      <classpath refid="sfp_attenuation_level.module.production.classpath"/>
+      <src refid="sfp_attenuation_level.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sfp_attenuation_level"/>
+    </javac2>
+    
+    <copy todir="${sfp_attenuation_level.output.dir}">
+      <fileset dir="${module.sfp_attenuation_level.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sfp_attenuation_level.tests" depends="register.custom.compilers,compile.module.sfp_attenuation_level.production" description="compile module sfp_attenuation_level; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.sfp_attenuation_level" description="cleanup module">
+    <delete dir="${sfp_attenuation_level.output.dir}"/>
+    <delete dir="${sfp_attenuation_level.testoutput.dir}"/>
+  </target>
+</project>
