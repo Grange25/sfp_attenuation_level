@@ -116,9 +116,11 @@ public class Controller {
                     System.out.println(dragboard.getFiles().get(i).getAbsolutePath());
                     ParseCSV.main(dragboard.getFiles().get(i).getAbsolutePath());
                 }
+                strings = new ArrayList<>();
+                strings.addAll(ParseCSV.getArrString());
                 dragEvent.consume();
-            }
 
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,9 +128,6 @@ public class Controller {
         if (check_box.isSelected()) {
             text_area.clear();
         }
-
-        strings = new ArrayList<>();
-        strings.addAll(ParseCSV.getArrString());
     }
 
     @FXML
