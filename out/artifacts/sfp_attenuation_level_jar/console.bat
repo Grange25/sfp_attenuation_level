@@ -1,1 +1,0 @@
-start javaw -jar sfp_attenuation_level.jar
