@@ -14,12 +14,15 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 public class Controller {
 
     private final FileChooser fileChooser = new FileChooser();
+    private List<String> validExtensions = Collections.singletonList("csv");
     @FXML
     public AnchorPane anchor_pane;
     @FXML
@@ -30,6 +33,7 @@ public class Controller {
     public Button buttonM;
     @FXML
     public TextArea text_area;
+
     private List<String> strings;
 
     public Controller() {
@@ -82,19 +86,37 @@ public class Controller {
         Dragboard dragboard = dragEvent.getDragboard();
         boolean success = false;
         if (dragboard.hasFiles()) {
-            AAA(dragboard);
+            AAA(dragboard, dragEvent);
             printResult(strings);
             success = true;
         }
-
         dragEvent.setDropCompleted(success);
         dragEvent.consume();
     }
 
+    private String getExtension(String fileName) {
+        String extension = "";
+
+        int i = fileName.lastIndexOf('.');
+        if (i > 0 && i < fileName.length() - 1) //if the name is not empty
+        {
+            return fileName.substring(i + 1).toLowerCase();
+        }
+        System.out.println(extension);
+        return extension;
+    }
+
     @FXML
-    private void AAA(Dragboard dragboard) {
+    private void AAA(Dragboard dragboard, DragEvent dragEvent) {
         try {
-            ParseCSV.main(dragboard.getUrl().substring(6));
+            if (validExtensions.containsAll(dragEvent.getDragboard().getFiles().stream().map(file -> getExtension(file.getName())).collect(Collectors.toList()))) {
+                for (int i = 0; i < dragboard.getFiles().size(); i++) {
+                    System.out.println(dragboard.getFiles().get(i).getAbsolutePath());
+                    ParseCSV.main(dragboard.getFiles().get(i).getAbsolutePath());
+                }
+                dragEvent.consume();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

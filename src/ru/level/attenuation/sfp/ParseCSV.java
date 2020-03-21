@@ -84,11 +84,13 @@ class ParseCSV {
         ArrayList<String> arrString = new ArrayList<>();
 
         StringBuilder SS = new StringBuilder();
-        for (int i = 0; i < Header.length(); i++) {
+        for (int i = 0; i < 25; i++) {
             SS.append("#");
         }
 
-        arrString.add("\n" + SS + " " + Header + " " + SS + "\n");
+        arrString.add("\n" + Header);
+        arrString.add("\n" + SS + SS + "\n");
+
 
         for (int i = 0; i < arrRRU1.size(); i++) {
             for (RRU rru : arrRRU1) {
@@ -119,6 +121,7 @@ class ParseCSV {
                     if (lb > 400 || lb < -400) {
                         lb = (lb < 0) ? lb * -1 : lb;
                         s2 = String.format("BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d) !NOK!%n", jb, jc, (jf * 0.01), (lb * 0.01), (jg * 0.01), ia);
+
                     } else {
                         lb = (lb < 0) ? lb * -1 : lb;
                         s2 = String.format("BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d)%n", jb, jc, (jf * 0.01), (lb * 0.01), (jg * 0.01), ia);
@@ -129,7 +132,7 @@ class ParseCSV {
             }
         }
 
-        arrString.add("" + SS + SS + "\n");
+        arrString.add("" + SS + " END " + SS + "\n");
         return arrString;
     }
 }

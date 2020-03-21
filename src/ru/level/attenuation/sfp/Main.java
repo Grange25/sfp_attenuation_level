@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -22,9 +24,11 @@ public class Main extends Application {
                     "main.fxml"));
             stage.setTitle("Проверка уровня затухания волны SFP");
             Parent root = loader.load();
+            root.getStylesheets().add(getClass().getResource("style/style.css").toExternalForm());
             Controller controller = loader.getController();
             Button button = controller.buttonM;
-
+            TextArea textArea = controller.text_area;
+            textArea.getStyleClass().add("text-area");
             button.setOnAction(event -> {
                 try {
                     controller.BBB(stage);
@@ -38,6 +42,7 @@ public class Main extends Application {
             stage.setMinWidth(480);
             stage.setMinHeight(200);
             stage.setHeight(640);
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("res/icon.png")));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
