@@ -1,13 +1,13 @@
 package ru.level.attenuation.sfp;
 
+import au.com.bytecode.opencsv.CSVReader;
+import ru.level.attenuation.sfp.classes.BBU_Port;
+import ru.level.attenuation.sfp.classes.RRU;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import au.com.bytecode.opencsv.CSVReader;
-import ru.level.attenuation.sfp.classes.BBU_Port;
-import ru.level.attenuation.sfp.classes.RRU;
 
 class ParseCSV {
 
@@ -83,7 +83,12 @@ class ParseCSV {
 
         ArrayList<String> arrString = new ArrayList<>();
 
-        arrString.add("\n\n" + Header + "\n\n");
+        StringBuilder SS = new StringBuilder();
+        for (int i = 0; i < Header.length(); i++) {
+            SS.append("#");
+        }
+
+        arrString.add("\n" + SS + " " + Header + " " + SS + "\n");
 
         for (int i = 0; i < arrRRU1.size(); i++) {
             for (RRU rru : arrRRU1) {
@@ -113,15 +118,18 @@ class ParseCSV {
 
                     if (lb > 400 || lb < -400) {
                         lb = (lb < 0) ? lb * -1 : lb;
-                        s2 = String.format("BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d) !NOK!%n%n", jb, jc, (jf * 0.01), (lb * 0.01), (jg * 0.01), ia);
+                        s2 = String.format("BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d) !NOK!%n", jb, jc, (jf * 0.01), (lb * 0.01), (jg * 0.01), ia);
                     } else {
                         lb = (lb < 0) ? lb * -1 : lb;
-                        s2 = String.format("BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d)%n%n", jb, jc, (jf * 0.01), (lb * 0.01), (jg * 0.01), ia);
+                        s2 = String.format("BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d)%n", jb, jc, (jf * 0.01), (lb * 0.01), (jg * 0.01), ia);
                     }
                     arrString.add(s1 + s2);
+
                 }
             }
         }
+
+        arrString.add("" + SS + SS + "\n");
         return arrString;
     }
 }
