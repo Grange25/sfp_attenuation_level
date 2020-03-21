@@ -91,7 +91,6 @@ class ParseCSV {
         arrString.add("\n" + Header);
         arrString.add("\n" + SS + SS + "\n");
 
-
         for (int i = 0; i < arrRRU1.size(); i++) {
             for (RRU rru : arrRRU1) {
                 if (arrBBUPorts.get(i).getSlot_BBU() == rru.getSlot_RRU() && arrBBUPorts.get(i).getPort_BBU() == rru.getPort_RRU()) {

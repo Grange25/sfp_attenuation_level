@@ -49,7 +49,9 @@ public class Controller {
             if (files == null || files.isEmpty()) {
                 return;
             }
-            text_area.clear();
+            if (check_box.isSelected()) {
+                text_area.clear();
+            }
             for (File file : files) {
                 setFilePath(file);
                 ParseCSV.main(file.getAbsolutePath());
