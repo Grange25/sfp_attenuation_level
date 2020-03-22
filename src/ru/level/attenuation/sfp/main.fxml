@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="anchor_pane" snapToPixel="false"
-            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ru.level.attenuation.sfp.Controller">
+            xmlns="http://javafx.com/javafx/8.0.241" fx:controller="ru.level.attenuation.sfp.Controller">
 
     <children>
         <VBox fx:id="vBox" fillWidth="false" onDragDropped="#onDragDropped" onDragOver="#onDragOver"
