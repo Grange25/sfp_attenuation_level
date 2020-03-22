@@ -38,8 +38,8 @@ public class Main extends Application {
             });
 
             stage.setResizable(true);
-            stage.setMaxWidth(480);
-            stage.setMinWidth(480);
+            stage.setMaxWidth(500);
+            stage.setMinWidth(500);
             stage.setMinHeight(200);
             stage.setHeight(640);
             stage.getIcons().add(new Image(Main.class.getResourceAsStream("res/icon.png")));

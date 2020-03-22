@@ -11,8 +11,7 @@ public class Result {
     private double rx_bbu;
     private double tx_rru;
 
-
-    public Result(String bts_name, int subRack_rru, int slot_bbu, int port_bbu, double tx_bbu, double rx_rru, double rx_bbu, double tx_rru) {
+    public Result(String bts_name, int slot_bbu, int port_bbu, double tx_bbu, double rx_bbu, int subRack_rru, double tx_rru, double rx_rru) {
         this.bts_name = bts_name;
         this.subRack_rru = subRack_rru;
         this.slot_bbu = slot_bbu;
@@ -47,9 +46,8 @@ public class Result {
 
         } else {
             difference2 = (difference2 < 0) ? difference2 * -1 : difference2;
-            s2 = String.format("BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d)%n", slot_bbu, port_bbu, rx_bbu, difference2, tx_rru, subRack_rru);
+            s2 = String.format("    BBU(%d %d) Rx= %.2f dbm <--(%.2f dbm)-- Tx= %.2f dbm RRU (%d)%n", slot_bbu, port_bbu, rx_bbu, difference2, tx_rru, subRack_rru);
         }
         return s1 + s2;
     }
-
 }

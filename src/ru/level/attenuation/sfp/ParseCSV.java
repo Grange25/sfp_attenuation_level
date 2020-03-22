@@ -115,7 +115,7 @@ class ParseCSV {
                             double rx_bbu = arrBBUPorts.get(i).getRx_BBU() * 0.01;
                             double tx_rru = rru.getTx_RRU() * 0.01;
 
-                            Result result = new Result(bts_name, subRack_rru, slot_bbu, port_bbu, tx_bbu, rx_rru, rx_bbu, tx_rru);
+                            Result result = new Result(bts_name, slot_bbu, port_bbu, tx_bbu, rx_bbu, subRack_rru, tx_rru, rx_rru);
                             arrResult.add(result);
                         }
                     }
@@ -143,13 +143,21 @@ class ParseCSV {
                 }
             }
 
-            for (Result result : arrResult) {
+            for (int i = 0; i < arrResult.size(); i++) {
+                Result result = arrResult.get(i);
                 String s2 = "[" + result.getBts_name() + "]";
                 if (s2.equals(s)) {
-                    RESULT.add(result.res());
+                    RESULT.add((i + 1) + ": " + result.res());
                 }
             }
         }
+
+        List<String> set2 = RESULT.stream().distinct().collect(Collectors.toList());
+
+        RESULT.clear();
+
+        RESULT.addAll(set2);
+
         return RESULT;
     }
 }
