@@ -92,6 +92,10 @@ public class Controller {
         Dragboard dragboard = dragEvent.getDragboard();
         boolean success = false;
 
+        if (check_box.isSelected()) {
+            text_area.clear();
+        }
+
         if (dragboard.hasFiles()) {
             AAA(dragboard, dragEvent);
             printResult(strings);
