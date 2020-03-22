@@ -31,7 +31,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </VBox.margin>
                 </Button>
-                <TextArea id="vBox" fx:id="text_area" prefHeight="640.0" prefWidth="480.0"
+                <TextArea fx:id="text_area" prefHeight="640.0" prefWidth="480.0"
                           promptText="Холодный кубик льда - кинь в меня!" styleClass="text"
                           stylesheets="@style/style.css">
                     <opaqueInsets>

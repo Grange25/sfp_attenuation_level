@@ -4,7 +4,7 @@ abstract class BTS {
 
     private String BTS_name;
 
-    String getBTS_name() {
+    public String getBTS_name() {
         return BTS_name;
     }
 

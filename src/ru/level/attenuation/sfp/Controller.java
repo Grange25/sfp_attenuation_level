@@ -34,7 +34,7 @@ public class Controller {
     @FXML
     public TextArea text_area;
 
-    private List<String> strings;
+    private static List<String> strings = new ArrayList<>();
 
     public Controller() {
     }
@@ -43,20 +43,23 @@ public class Controller {
     private void initialize() {
     }
 
+
     @FXML
     private void printLog(List<File> files) {
         try {
             if (files == null || files.isEmpty()) {
                 return;
             }
+
             if (check_box.isSelected()) {
                 text_area.clear();
             }
+
             for (File file : files) {
                 setFilePath(file);
                 ParseCSV.main(file.getAbsolutePath());
-                strings = new ArrayList<>();
-                strings.addAll(ParseCSV.getArrString());
+                strings.clear();
+                strings.addAll(ParseCSV.getRESULT());
                 printResult(strings);
             }
         } catch (Exception e) {
@@ -69,6 +72,7 @@ public class Controller {
         if (strings == null || strings.isEmpty()) {
             return;
         }
+
         for (String string : strings) {
             System.out.println(string);
             text_area.appendText(string + "\n");
@@ -87,6 +91,7 @@ public class Controller {
     public void onDragDropped(DragEvent dragEvent) {
         Dragboard dragboard = dragEvent.getDragboard();
         boolean success = false;
+
         if (dragboard.hasFiles()) {
             AAA(dragboard, dragEvent);
             printResult(strings);
@@ -95,6 +100,7 @@ public class Controller {
         dragEvent.setDropCompleted(success);
         dragEvent.consume();
     }
+
 
     private String getExtension(String fileName) {
         String extension = "";
@@ -116,17 +122,13 @@ public class Controller {
                     System.out.println(dragboard.getFiles().get(i).getAbsolutePath());
                     ParseCSV.main(dragboard.getFiles().get(i).getAbsolutePath());
                 }
-                strings = new ArrayList<>();
-                strings.addAll(ParseCSV.getArrString());
+                strings.clear();
+                strings.addAll(ParseCSV.getRESULT());
                 dragEvent.consume();
 
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        if (check_box.isSelected()) {
-            text_area.clear();
         }
     }
 
@@ -167,4 +169,3 @@ public class Controller {
     }
 
 }
-
